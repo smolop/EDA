@@ -1,0 +1,39 @@
+if(jugadores.isEmpty())
+			jugadores.add(pay.payer, new Jugador(pay.payer));
+		if(pay.payer == 0){	
+			Jugador estafador = null;
+			if(jugadores.get(pay.payer) == null) {
+				estafador = new Jugador(pay.payer);
+				jugadores.add(pay.payer, estafador);
+			}else{
+				estafador = jugadores.get(pay.payer);
+			}
+			if(jugadores.size() - 1 > pay.winner)
+				jugadores.add(pay.winner, new Jugador(pay.winner));
+			else if(jugadores.get(pay.winner) == null)
+				jugadores.add(pay.winner, new Jugador(pay.winner));
+			Jugador estafado = jugadores.get(pay.winner);
+			estafado.setAmount(estafado.getAmount() + pay.amount);
+			estafador.setAmount(estafador.getAmount() - pay.amount);
+			estafador.setInvalids(estafador.getInvalids() + pay.amount);
+			estafado.setInvalids(estafado.getInvalids() + pay.amount);
+		}
+		else {
+			Jugador pagador = null;
+			if(jugadores.get(pay.payer) == null) {
+				pagador = new Jugador(pay.payer);
+				jugadores.add(pay.payer, pagador);
+			}else{
+				pagador = jugadores.get(pay.payer);
+			}
+			if(jugadores.size() - 1 > pay.winner)
+				jugadores.add(pay.winner, new Jugador(pay.winner));
+			else if(jugadores.get(pay.winner) == null)
+				jugadores.add(pay.winner, new Jugador(pay.winner));
+			Jugador cobrador = jugadores.get(pay.winner);
+			cobrador.setAmount(cobrador.getAmount() + pay.amount);
+			pagador.setAmount(pagador.getAmount() - pay.amount);
+			pagador.setInvalids(pagador.getValid() + pay.amount);
+			cobrador.setInvalids(cobrador.getValid() + pay.amount);
+		}
+	
